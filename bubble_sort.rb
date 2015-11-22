@@ -14,4 +14,20 @@ class Array
 		end
 		self
 	end
+
+	def bubble_sort_by
+		swapped = true
+		while swapped do
+			swapped = false
+			for index in 0...(self.length - 1)
+				if yield(self[index], self[index + 1]) > 0
+					value = self[index]
+					self[index] = self[index + 1]
+					self[index + 1] = value
+					swapped = true
+				end
+			end
+		end
+		self
+	end
 end
