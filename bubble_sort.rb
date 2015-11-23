@@ -1,33 +1,27 @@
 class Array
 	def bubble_sort
-		swapped = true
-		while swapped do
-			swapped = false
-			for index in 0...(self.length - 1)
-				if self[index] > self[index + 1]
-					value = self[index]
-					self[index] = self[index + 1]
-					self[index + 1] = value
-					swapped = true
-				end
-			end
-		end
+		sort_it(self, (self[index] > self[index + 1]))
 		self
 	end
 
 	def bubble_sort_by
+		sort_it(self, (yield(self[index], self[index + 1]) > 0))
+		self
+	end
+
+	private
+	def sort_it(array, condition)
 		swapped = true
 		while swapped do
 			swapped = false
-			for index in 0...(self.length - 1)
-				if yield(self[index], self[index + 1]) > 0
-					value = self[index]
-					self[index] = self[index + 1]
-					self[index + 1] = value
+			for index in 0...(array.length - 1)
+				if condition
+					value = array[index]
+					array[index] = array[index + 1]
+					array[index + 1] = value
 					swapped = true
 				end
 			end
 		end
-		self
 	end
 end
