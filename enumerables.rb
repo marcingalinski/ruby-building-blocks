@@ -11,7 +11,7 @@ module Enumerable
 		result_array = Array.new
 
 		self.my_each do |value|
-			result_array << value if yield value
+			result_array << value if yield(value)
 		end
 
 		result_array
@@ -21,7 +21,7 @@ module Enumerable
 		result = true
 
 		self.my_each do |value|
-			result = false unless yield value
+			result = false unless yield(value)
 		end
 
 		result
@@ -31,14 +31,14 @@ module Enumerable
 		result = false
 
 		self.my_each do |value|
-			result = true if yield value
+			result = true if yield(value)
 		end
 
 		result
 	end
 
 	def my_none?
-		!self.my_any? { |value| yield value }
+		!self.my_any? { |value| yield(value) }
 	end
 
 	def my_count argument=nil
@@ -57,7 +57,13 @@ module Enumerable
 
 	def my_map
 		result_array = Array.new
-		self.my_each { |*key, value| result << yield(*key, value) }
+		self.my_each { |value| result_array << yield(value) }
+		result_array
+	end
+
+	def my_map proc
+		result_array = Array.new
+		self.my_each { |value| result_array << proc.call(value) }
 		result_array
 	end
 
@@ -81,3 +87,6 @@ def multiply_els array
 end
 
 multiply_els([2,4,5])
+
+proc = Proc.new { |value| value * 2 }
+puts ([1, 2, 3].my_map proc).join
