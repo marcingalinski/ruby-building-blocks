@@ -22,4 +22,11 @@ module Enumerable
 		end
 		array
 	end
+	def my_all?
+		result = true
+		self.my_each do |*key, value|
+			false if yield(*key, value)
+		end
+		result
+	end
 end
