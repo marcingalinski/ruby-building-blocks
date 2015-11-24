@@ -36,6 +36,7 @@ module Enumerable
 		end
 		result
 	end
+	def my_none?
+		!self.my_any? { |*key, value| yield(*key, value) }
+	end
 end
-
-puts ["1", "2", "3"].my_any? { |num| num.is_a? Array }
