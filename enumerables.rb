@@ -55,15 +55,21 @@ module Enumerable
 		count
 	end
 
-	def my_map
-		result_array = Array.new
-		self.my_each { |value| result_array << yield(value) }
-		result_array
-	end
+	# def my_map
+	# 	result_array = Array.new
+	# 	self.my_each { |value| result_array << yield(value) }
+	# 	result_array
+	# end
 
 	def my_map proc
+		temp_array = Array.new
 		result_array = Array.new
-		self.my_each { |value| result_array << proc.call(value) }
+		self.my_each { |value| temp_array << proc.call(value) }
+		if block_given?
+			temp_array.my_each { |value| result_array << yield(value) }
+		else
+			result_array = temp_array
+		end
 		result_array
 	end
 
@@ -87,6 +93,3 @@ def multiply_els array
 end
 
 multiply_els([2,4,5])
-
-proc = Proc.new { |value| value * 2 }
-puts ([1, 2, 3].my_map proc).join
