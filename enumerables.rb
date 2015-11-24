@@ -15,4 +15,11 @@ module Enumerable
 	 		for index in 0...self.length do yield(keys[index], self[keys[index]], index); end
 	 	end	
 	end
+	def my_select
+		array = Array.new
+		self.my_each do |*key, value|
+			array << value if yield(*key, value)
+		end
+		array
+	end
 end
