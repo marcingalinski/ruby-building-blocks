@@ -39,4 +39,9 @@ module Enumerable
 	def my_none?
 		!self.my_any? { |*key, value| yield(*key, value) }
 	end
+	def my_map
+		result = []
+		self.my_each { |*key, value| result << yield(*key, value) }
+		result
+	end
 end
