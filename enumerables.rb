@@ -1,6 +1,6 @@
 module Enumerable
 	def my_each
-	 	for index in 0...self.length do yield(self[index]); end 
+	 	for value in self do yield(value); end 
 	end
 
 	def my_each_with_index
@@ -75,3 +75,9 @@ module Enumerable
 		memo
 	end
 end
+
+def multiply_els array
+	array.my_inject(1, :*)
+end
+
+multiply_els([2,4,5])
