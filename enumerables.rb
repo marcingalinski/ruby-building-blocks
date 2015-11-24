@@ -25,8 +25,17 @@ module Enumerable
 	def my_all?
 		result = true
 		self.my_each do |*key, value|
-			false if yield(*key, value)
+			result = false unless yield(*key, value)
+		end
+		result
+	end
+	def my_any?
+		result = false
+		self.my_each do |*key, value|
+			result = true if yield(*key, value)
 		end
 		result
 	end
 end
+
+puts ["1", "2", "3"].my_any? { |num| num.is_a? Array }
