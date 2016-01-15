@@ -1,14 +1,14 @@
-require_relative 'caesar_cipher.rb'
+require_relative "../caesar_cipher"
 
 describe '#convert' do
 	context 'with args \'a\', 1' do
-		it 'return \'b\'' do
+		it 'returns \'b\'' do
 			expect(convert('a', 1)).to eql('b')
 		end
 	end
 
 	context 'with args \'z\', 1' do
-		it 'return \'a\'' do
+		it 'returns \'a\'' do
 			expect(convert('z', 1)).to eql('a')
 		end
 	end
@@ -20,7 +20,7 @@ describe '#convert' do
 	end
 
 	context 'with multi char string' do
-		it 'return converted string' do
+		it 'returns converted string' do
 			expect(convert('Ruby', 1)).to eql('Svcz')
 		end
 	end

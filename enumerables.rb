@@ -1,10 +1,16 @@
 module Enumerable
 	def my_each
-	 	for value in self do yield(value); end 
+		if block_given?
+			for item in self
+				yield item
+			end
+		else
+	 		self.to_enum
+	 	end
 	end
 
 	def my_each_with_index
-	 	for index in 0...self.length do yield(self[index], index); end 
+	 	for index in 0...self.length do yield(self[index], index); end
 	end
 
 	def my_select
